@@ -12,5 +12,6 @@ func routes() {
 		v1.GET("/account/:id", handlers.ShowUser)
 
 		v1.POST("/transaction", handlers.CreateTransaction)
+		v1.GET("/transaction/:id", handlers.ShowTransaction)
 	}
 }
