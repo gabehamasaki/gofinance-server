@@ -1,6 +1,7 @@
 package router
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -15,5 +16,5 @@ func Init() {
 
 	routes()
 
-	app.Run(os.Getenv("PORT"))
+	app.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
