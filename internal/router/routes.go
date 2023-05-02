@@ -9,5 +9,6 @@ func routes() {
 	v1 := app.Group("/api/v1")
 	{
 		v1.POST("/account", handlers.CreateUser)
+		v1.GET("/account/:id", handlers.ShowUser)
 	}
 }
