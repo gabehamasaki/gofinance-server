@@ -11,11 +11,11 @@ import (
 func main() {
 
 	if err := godotenv.Load(); err != nil {
-		fmt.Printf("error loading environment: %v", err)
+		fmt.Printf("error loading environment: %v\n", err)
 	}
 
 	if err := database.Init(); err != nil {
-		fmt.Printf("error connect to database: %v", err)
+		fmt.Printf("error connect to database: %v\n", err)
 		return
 	}
 
