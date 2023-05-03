@@ -42,5 +42,13 @@ func CreateTransaction(ctx *gin.Context) {
 		return
 	}
 
-	helpers.SendSuccess(ctx, "create-account", &transaction)
+	response := &dtos.TransactionResponseDTO{
+		ID:          transaction.ID,
+		Title:       transaction.Title,
+		Description: transaction.Description,
+		Value:       transaction.Value,
+		Type:        transaction.Type,
+	}
+
+	helpers.SendSuccess(ctx, "create-transaction", &response)
 }

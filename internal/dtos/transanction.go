@@ -1,6 +1,10 @@
 package dtos
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/google/uuid"
+)
 
 type CreateTransactionDTO struct {
 	Title       string  `json:"title"`
@@ -32,4 +36,12 @@ func (dto *CreateTransactionDTO) Validate() error {
 	}
 
 	return nil
+}
+
+type TransactionResponseDTO struct {
+	ID          uuid.UUID `json:"id"`
+	Title       string    `json:"title"`
+	Description *string   `json:"description"`
+	Value       float64   `json:"value"`
+	Type        string    `json:"type"`
 }
