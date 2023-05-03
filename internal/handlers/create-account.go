@@ -38,6 +38,7 @@ func CreateUser(ctx *gin.Context) {
 	}
 
 	response := &dtos.AccountResponseDTO{
+		ID:    account.ID,
 		Name:  account.Name,
 		Email: account.Email,
 	}

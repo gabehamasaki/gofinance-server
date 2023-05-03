@@ -33,9 +33,10 @@ func (dto *CreateAccountDTO) Validate() error {
 	return nil
 }
 
-type AccountResponseDTO struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+type CreateAccountResponseDTO struct {
+	ID    uuid.UUID `json:"id"`
+	Name  string    `json:"name"`
+	Email string    `json:"email"`
 }
 
 type ShowAccountResponseDTO struct {
