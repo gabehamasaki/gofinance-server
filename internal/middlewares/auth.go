@@ -15,7 +15,16 @@ import (
 )
 
 func AuthMiddleware(ctx *gin.Context) {
-	tokenString := strings.Split(ctx.GetHeader("Authorization"), " ")[1]
+
+	authenticationHeader := ctx.GetHeader("Authorization")
+
+	if authenticationHeader == "" {
+		helpers.SendError(ctx, http.StatusUnauthorized, "auth-middleware", "Invalid token")
+		ctx.Abort()
+		return
+	}
+
+	tokenString := strings.Split(authenticationHeader, " ")[1]
 
 	if tokenString == "" {
 		helpers.SendError(ctx, http.StatusUnauthorized, "auth-middleware", "Invalid token")
@@ -51,7 +60,7 @@ func AuthMiddleware(ctx *gin.Context) {
 			return
 		}
 
-		ctx.Set("account", &account)
+		ctx.Set("account", account)
 
 		ctx.Next()
 	} else {
