@@ -19,24 +19,18 @@ func CreateTransaction(ctx *gin.Context) {
 		return
 	}
 
-	var existOwner *models.Account
-
-	err := db.First(&existOwner, "id = ?", request.Owner).Error
-	if err != nil {
-		helpers.SendError(ctx, http.StatusBadRequest, "create-transaction", "owner not exists")
-		return
-	}
+	existOwner := helpers.GetAccount(ctx)
 
 	transaction := &models.Transaction{
 		Title:       request.Title,
 		Description: request.Description,
 		Value:       request.Value,
 		Type:        request.Type,
-		Owner:       request.Owner,
+		Owner:       existOwner.ID.String(),
 	}
 	transaction.GenerateId()
 
-	err = db.Create(&transaction).Error
+	err := db.Create(&transaction).Error
 	if err != nil {
 		helpers.SendError(ctx, http.StatusInternalServerError, "create-transaction", err.Error())
 		return
