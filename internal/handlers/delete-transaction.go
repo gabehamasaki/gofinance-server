@@ -25,5 +25,7 @@ func DeleteTransaction(ctx *gin.Context) {
 		return
 	}
 
+	ctx.Set("account", nil)
+
 	helpers.SendSuccess(ctx, "delete-transaction", &transaction)
 }
