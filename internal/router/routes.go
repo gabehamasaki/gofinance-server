@@ -17,10 +17,10 @@ func routes() {
 
 		private := v1.Group("", middlewares.AuthMiddleware)
 		{
-			private.GET("/account/:id", handlers.ShowUser)
-			private.GET("/account/:id/transactions", handlers.ShowAccountTransactions)
-			private.DELETE("/account/:id", handlers.DeleteAccount)
-			private.PATCH("/account/:id", handlers.UpdateAccount)
+			private.GET("/account", handlers.ShowUser)
+			private.GET("/account/transactions", handlers.ShowAccountTransactions)
+			private.DELETE("/account", handlers.DeleteAccount)
+			private.PATCH("/account", handlers.UpdateAccount)
 
 			private.POST("/transaction", handlers.CreateTransaction)
 			private.GET("/transaction/:id", handlers.ShowTransaction)

@@ -9,19 +9,13 @@ import (
 )
 
 func DeleteAccount(ctx *gin.Context) {
-	id := ctx.Param("id")
 
-	account := &models.Account{}
-
-	err := db.First(&account, "id = ?", id).Error
-	if err != nil {
-		helpers.SendError(ctx, http.StatusBadRequest, "delete-account", err.Error())
-		return
-	}
+	account := helpers.GetAccount(ctx)
+	id := account.ID.String()
 
 	transactions := &[]models.Transaction{}
 
-	err = db.Find(&transactions, "owner = ?", id).Error
+	err := db.Find(&transactions, "owner = ?", id).Error
 	if err != nil {
 		helpers.SendError(ctx, http.StatusBadRequest, "delete-account", err.Error())
 		return

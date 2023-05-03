@@ -9,7 +9,7 @@ import (
 )
 
 func ShowAccountTransactions(ctx *gin.Context) {
-	id := ctx.Param("id")
+	id := helpers.GetAccount(ctx).ID.String()
 
 	transactions := &[]models.Transaction{}
 
