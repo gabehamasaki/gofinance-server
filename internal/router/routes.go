@@ -14,5 +14,6 @@ func routes() {
 
 		v1.POST("/transaction", handlers.CreateTransaction)
 		v1.GET("/transaction/:id", handlers.ShowTransaction)
+		v1.DELETE("/transaction/:id", handlers.DeleteTransaction)
 	}
 }
