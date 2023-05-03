@@ -38,7 +38,31 @@ func (dto *CreateTransactionDTO) Validate() error {
 	return nil
 }
 
+type UpdateTransactionRequestDTO struct {
+	ID          uuid.UUID `json:"id"`
+	Title       string    `json:"title"`
+	Description *string   `json:"description"`
+	Value       float64   `json:"value"`
+	Type        string    `json:"type"`
+}
+
+func (dto *UpdateTransactionRequestDTO) Validate() error {
+	if dto.Title == "" && dto.Value <= 0 && dto.Type == "" {
+		return fmt.Errorf("request body is empty or malformed")
+	}
+
+	return nil
+}
+
 type TransactionResponseDTO struct {
+	ID          uuid.UUID `json:"id"`
+	Title       string    `json:"title"`
+	Description *string   `json:"description"`
+	Value       float64   `json:"value"`
+	Type        string    `json:"type"`
+}
+
+type UpdateTransactionResponseDTO struct {
 	ID          uuid.UUID `json:"id"`
 	Title       string    `json:"title"`
 	Description *string   `json:"description"`
