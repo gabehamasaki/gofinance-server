@@ -47,7 +47,7 @@ type UpdateTransactionRequestDTO struct {
 }
 
 func (dto *UpdateTransactionRequestDTO) Validate() error {
-	if dto.Title == "" && dto.Value <= 0 && dto.Type == "" {
+	if dto.Title == "" && dto.Value <= 0 && dto.Type == "" && dto.Description == nil {
 		return fmt.Errorf("request body is empty or malformed")
 	}
 
