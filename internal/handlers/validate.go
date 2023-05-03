@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gabehamasaki/finance-server/internal/helpers"
+	"github.com/gabehamasaki/finance-server/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 )
@@ -37,7 +38,6 @@ func ValidateToken(ctx *gin.Context) {
 
 	if err != nil {
 		helpers.SendErrorData(ctx, http.StatusBadRequest, "validate-auth", gin.H{
-			"token": tokenString,
 			"valid": false,
 		})
 		return
@@ -46,7 +46,6 @@ func ValidateToken(ctx *gin.Context) {
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok && !token.Valid {
 		helpers.SendErrorData(ctx, http.StatusBadRequest, "validate-auth", gin.H{
-			"token": tokenString,
 			"valid": false,
 		})
 		return
@@ -54,14 +53,20 @@ func ValidateToken(ctx *gin.Context) {
 
 	if float64(time.Now().Unix()) > claims["exp"].(float64) {
 		helpers.SendErrorData(ctx, http.StatusBadRequest, "validate-auth", gin.H{
-			"token": tokenString,
+			"valid": false,
+		})
+		return
+	}
+
+	var account models.Account
+	if err := db.First(&account, "id = ?", claims["sub"]).Error; err != nil {
+		helpers.SendErrorData(ctx, http.StatusBadRequest, "validate-auth", gin.H{
 			"valid": false,
 		})
 		return
 	}
 
 	helpers.SendSuccess(ctx, "validate-auth", gin.H{
-		"token": tokenString,
 		"valid": true,
 	})
 }
