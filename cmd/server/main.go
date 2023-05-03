@@ -12,7 +12,6 @@ func main() {
 
 	if err := godotenv.Load(); err != nil {
 		fmt.Printf("error loading environment: %v", err)
-		return
 	}
 
 	if err := database.Init(); err != nil {

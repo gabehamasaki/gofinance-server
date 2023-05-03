@@ -1,0 +1,8 @@
+.env
+.gitignore
+.air.toml
+package*
+makefile
+.github
+tmp
+tf
