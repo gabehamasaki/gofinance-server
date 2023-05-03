@@ -33,7 +33,28 @@ func (dto *CreateAccountDTO) Validate() error {
 	return nil
 }
 
+type UpdateAccountDTO struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+func (dto *UpdateAccountDTO) Validate() error {
+
+	if dto.Name == "" && dto.Email == "" && dto.Password == "" {
+		return fmt.Errorf("request body is empty or malformed")
+	}
+
+	return nil
+}
+
 type CreateAccountResponseDTO struct {
+	ID    uuid.UUID `json:"id"`
+	Name  string    `json:"name"`
+	Email string    `json:"email"`
+}
+
+type UpdateAccountResponseDTO struct {
 	ID    uuid.UUID `json:"id"`
 	Name  string    `json:"name"`
 	Email string    `json:"email"`

@@ -12,6 +12,7 @@ func routes() {
 		v1.GET("/account/:id", handlers.ShowUser)
 		v1.GET("/account/:id/transactions", handlers.ShowAccountTransactions)
 		v1.DELETE("/account/:id", handlers.DeleteAccount)
+		v1.PATCH("/account/:id", handlers.UpdateAccount)
 
 		v1.POST("/transaction", handlers.CreateTransaction)
 		v1.GET("/transaction/:id", handlers.ShowTransaction)
