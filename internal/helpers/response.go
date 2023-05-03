@@ -18,3 +18,12 @@ func SendError(ctx *gin.Context, code int, op string, msg string) {
 		"message ":  msg,
 	})
 }
+
+func SendErrorData(ctx *gin.Context, code int, op string, data interface{}) {
+	ctx.Header("Content-Type", "application/json")
+	ctx.JSON(code, gin.H{
+		"errorCode": code,
+		"op":        op,
+		"data ":     data,
+	})
+}

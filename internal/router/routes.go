@@ -13,6 +13,8 @@ func routes() {
 	{
 
 		v1.POST("/auth", handlers.Auth)
+		v1.GET("/auth/validate", handlers.ValidateToken)
+
 		v1.POST("/account", handlers.CreateUser)
 
 		private := v1.Group("", middlewares.AuthMiddleware)
