@@ -37,7 +37,12 @@ func CreateUser(ctx *gin.Context) {
 		return
 	}
 
-	helpers.SendSuccess(ctx, "create-account", &account)
+	response := &dtos.AccountResponseDTO{
+		Name:  account.Name,
+		Email: account.Email,
+	}
+
+	helpers.SendSuccess(ctx, "create-account", &response)
 }
 
 func encryptPassword(pass string) string {

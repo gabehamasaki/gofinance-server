@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehamasaki/finance-server/internal/dtos"
 	"github.com/gabehamasaki/finance-server/internal/helpers"
 	"github.com/gabehamasaki/finance-server/internal/models"
 	"github.com/gin-gonic/gin"
@@ -19,5 +20,11 @@ func ShowUser(ctx *gin.Context) {
 		return
 	}
 
-	helpers.SendSuccess(ctx, "show-user", &account)
+	response := &dtos.ShowAccountResponseDTO{
+		ID:    account.ID,
+		Name:  account.Name,
+		Email: account.Email,
+	}
+
+	helpers.SendSuccess(ctx, "show-user", &response)
 }
